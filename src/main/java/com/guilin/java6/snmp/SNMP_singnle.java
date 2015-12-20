@@ -1,7 +1,6 @@
 package com.guilin.java6.snmp;
 
 import org.apache.commons.io.FileUtils;
-import org.hsqldb.lib.FileUtil;
 import org.junit.Test;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
