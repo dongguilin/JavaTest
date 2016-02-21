@@ -19,7 +19,7 @@ public class ThreadPoolTest {
             Runnable run = new Runnable() {
                 public void run() {
                     long time = (long) (Math.random() * 1000);
-                    System.out.println("Sleeping " + time + "ms"+","+Thread.currentThread());
+                    System.out.println("Sleeping " + time + "ms" + "," + Thread.currentThread());
                     try {
                         Thread.sleep(time);
                     } catch (InterruptedException e) {
