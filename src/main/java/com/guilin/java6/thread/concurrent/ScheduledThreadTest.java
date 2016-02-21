@@ -20,6 +20,7 @@ public class ScheduledThreadTest {
                 .newScheduledThreadPool(2);
         final Runnable beeper = new Runnable() {
             int count = 0;
+
             public void run() {
                 System.out.println(new Date() + " beep " + (++count));
             }
