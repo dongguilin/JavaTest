@@ -1,7 +1,6 @@
 package com.guilin.java6.snmp;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
 import org.snmp4j.CommunityTarget;
 import org.snmp4j.PDU;
 import org.snmp4j.Snmp;
@@ -20,20 +19,65 @@ public class SNMP_singnle {
 
 
     private static Map<String, String> tempOidval = new HashMap<String, String>();
-    private static int speed = 60;
 
-    private static String address = "udp:10.160.2.254/161";
+    //    private static String address = "udp:10.160.2.254/161";
     private static String community = "anq.tivoli92";
 
 
     public void statusJK() {
 
+        String[] ips = {"10.160.2.254"};
+        for (String ip : ips) {
+            handler(ip, community);
+        }
+
+    }
+
+    private void test(String ip){
+        TransportMapping transport = null;
+
+        try {
+
+            String community = "udp:%s/161";
+
+            //设置管理进程的IP的端口
+            Address targetAddress = GenericAddress.parse(String.format(community, ip));
+
+            transport = new DefaultUdpTransportMapping();
+            Snmp snmp = new Snmp(transport);
+            transport.listen();// 监听
+
+            //设置target
+            CommunityTarget target = new CommunityTarget();
+            target.setCommunity(new OctetString(community));
+            target.setAddress(targetAddress);// 设置目标Agent地址
+            target.setRetries(2);// 重试次数
+            target.setTimeout(5000);// 超时设置
+            target.setVersion(SnmpConstants.version2c);// 版本
+
+            transport.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (transport != null) {
+                try {
+                    transport.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    private void handler(String ip, String community) {
         TransportMapping transport = null;
 
         try {
 
             //设置管理进程的IP的端口
-            Address targetAddress = GenericAddress.parse(address);
+            Address targetAddress = GenericAddress.parse(String.format("udp:%s/161", ip));
 
             transport = new DefaultUdpTransportMapping();
             Snmp snmp = new Snmp(transport);
@@ -62,9 +106,9 @@ public class SNMP_singnle {
 //                System.out.println(buffer.toString());
 //            }
 
-            cpu(snmp,target);
+            cpu(snmp, target);
             memory(snmp, target);
-            temperature(snmp,target);
+            temperature(snmp, target);
 
             transport.close();
 
@@ -80,12 +124,11 @@ public class SNMP_singnle {
             }
         }
 
-
     }
 
     //cpu
     public static void cpu(Snmp snmp, CommunityTarget target) throws Exception {
-        File file = new File("/Users/guilin1/Documents/test/bjyh/cpu.log");
+        File file = new File("/Users/guilin1/Documents/test2/bjyh/cpu.log");
 
         String[] cpmCPUTotal5sec = query(snmp, target, "1.3.6.1.4.1.9.9.109.1.1.1.1.3.1");
 
@@ -94,55 +137,44 @@ public class SNMP_singnle {
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         StringBuffer buffer = new StringBuffer();
         String dateStr = format.format(new Date());
-        buffer.append(dateStr).append(",").append(cpmCPUTotal5sec[0]).append(",").append(cpmCPUTotal5sec[1]).append("\r\n")
-                .append(dateStr).append(",").append(cpmCPUTotal5min[0]).append(",").append(cpmCPUTotal5min[1]).append("\r\n");
-        buffer.append("\r\n");
+        buffer.append(dateStr)
+                .append(",").append(cpmCPUTotal5sec[1])
+                .append(",").append(cpmCPUTotal5min[1])
+                .append("\r\n");
         FileUtils.write(file, buffer.toString(), true);
     }
 
     //温度
     public static void temperature(Snmp snmp, CommunityTarget target) throws Exception {
-        File file = new File("/Users/guilin1/Documents/test/bjyh/temperature.log");
-        if (file.exists() && file.length() == 0 || !file.exists()) {
-            Map<String, String> entPhysicalIndex = query(snmp, target, "1.3.6.1.4.1.9.9.91.1.1.1.1", "1.3.6.1.4.1.9.9.91.1.1.1.2");
-            FileUtils.write(file, entPhysicalIndex.toString() + "\r\n", true);
-        }
+        File file = new File("/Users/guilin1/Documents/test2/bjyh/temperature.log");
 
-        Map<String, String> entSensorValue = query(snmp, target, "1.3.6.1.4.1.9.9.91.1.1.1.1.4", "1.3.6.1.4.1.9.9.91.1.1.1.1.5");
+        String[] vt1OutletTemperature = query(snmp, target, "1.3.6.1.4.1.9.9.13.1.3.1.3.1");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        Iterator<Map.Entry<String, String>> iterator = entSensorValue.entrySet().iterator();
         StringBuffer buffer = new StringBuffer();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> entry = iterator.next();
-            String key = entry.getKey();
-            String value = entry.getValue();
-            buffer.append(format.format(new Date())).append(",")
-                    .append(key).append(",")
-                    .append(value).append("\r\n");
-        }
-        buffer.append("\r\n");
+        String dateStr = format.format(new Date());
+        buffer.append(dateStr)
+                .append(",").append(vt1OutletTemperature[1])
+                .append("\r\n");
         FileUtils.write(file, buffer.toString(), true);
     }
 
 
     //内存
     public static void memory(Snmp snmp, CommunityTarget target) throws Exception {
-        File file = new File("/Users/guilin1/Documents/test/bjyh/memory.log");
-        if (file.exists() && file.length() == 0 || !file.exists()) {
-
-        }
+        File file = new File("/Users/guilin1/Documents/test2/bjyh/memory.log");
 
         String[] ciscoMemoryPoolUsed = query(snmp, target, "1.3.6.1.4.1.9.9.48.1.1.1.5.1");
 
-        String[] ciscoMemoryPoolFree=query(snmp,target,"1.3.6.1.4.1.9.9.48.1.1.1.6.1");
+        String[] ciscoMemoryPoolFree = query(snmp, target, "1.3.6.1.4.1.9.9.48.1.1.1.6.1");
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         StringBuffer buffer = new StringBuffer();
         String dateStr = format.format(new Date());
-        buffer.append(dateStr).append(",").append(ciscoMemoryPoolUsed[0]).append(",").append(ciscoMemoryPoolUsed[1]).append("\r\n")
-                .append(dateStr).append(",").append(ciscoMemoryPoolFree[0]).append(",").append(ciscoMemoryPoolFree[1]).append("\r\n");
-        buffer.append("\r\n");
+        buffer.append(dateStr)
+                .append(",").append(ciscoMemoryPoolUsed[1])
+                .append(",").append(ciscoMemoryPoolFree[1])
+                .append("\r\n");
         FileUtils.write(file, buffer.toString(), true);
     }
 
@@ -169,26 +201,26 @@ public class SNMP_singnle {
 //        FileUtils.write(file, buffer.toString(), true);
 //    }
 
-    @Test
-    public void testTemperature() throws Exception {
-        //设置管理进程的IP的端口
-        Address targetAddress = GenericAddress.parse(address);
-
-        TransportMapping transport = new DefaultUdpTransportMapping();
-        Snmp snmp = new Snmp(transport);
-        transport.listen();// 监听
-
-        //设置target
-        CommunityTarget target = new CommunityTarget();
-        target.setCommunity(new OctetString(community));
-        target.setAddress(targetAddress);// 设置目标Agent地址
-        target.setRetries(2);// 重试次数
-        target.setTimeout(5000);// 超时设置
-        target.setVersion(SnmpConstants.version2c);// 版本
-
-        temperature(snmp, target);
-        transport.close();
-    }
+//    @Test
+//    public void testTemperature() throws Exception {
+//        //设置管理进程的IP的端口
+//        Address targetAddress = GenericAddress.parse(address);
+//
+//        TransportMapping transport = new DefaultUdpTransportMapping();
+//        Snmp snmp = new Snmp(transport);
+//        transport.listen();// 监听
+//
+//        //设置target
+//        CommunityTarget target = new CommunityTarget();
+//        target.setCommunity(new OctetString(community));
+//        target.setAddress(targetAddress);// 设置目标Agent地址
+//        target.setRetries(2);// 重试次数
+//        target.setTimeout(5000);// 超时设置
+//        target.setVersion(SnmpConstants.version2c);// 版本
+//
+//        temperature(snmp, target);
+//        transport.close();
+//    }
 
 
     public static void main(String[] args) throws Exception {
