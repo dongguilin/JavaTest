@@ -1,4 +1,4 @@
-package com.guilin.java6.concurrent;
+package com.guilin.java6.thread.concurrent;
 
 import org.junit.Test;
 
