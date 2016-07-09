@@ -1,4 +1,4 @@
-package com.guilin.java6.thread;
+package com.guilin.java6.thread.concurrent;
 
 import java.util.concurrent.Exchanger;
 import java.util.concurrent.ExecutorService;

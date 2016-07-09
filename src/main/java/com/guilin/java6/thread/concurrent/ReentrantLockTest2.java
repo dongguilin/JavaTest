@@ -1,15 +1,16 @@
-package com.guilin.java6.thread;
+package com.guilin.java6.thread.concurrent;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by guilin on 2014/6/7.
+ * 重入锁
  */
-public class LockTest {
+public class ReentrantLockTest2 {
 
     public static void main(String[] args) {
-        new LockTest().init();
+        new ReentrantLockTest2().init();
     }
 
     private void init() {

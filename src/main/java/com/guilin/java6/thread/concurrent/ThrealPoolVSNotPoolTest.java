@@ -1,4 +1,4 @@
-package com.guilin.java6.thread;
+package com.guilin.java6.thread.concurrent;
 
 import sun.awt.util.IdentityLinkedList;
 
@@ -11,8 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by hadoop on 2015/12/19.
+ * 线程池与不使用线程池对比
+ * 使用线程池时，线程可复用，无重复创建线程的开销，效率更高
  */
-public class BuildRandomTest {
+public class ThrealPoolVSNotPoolTest {
 
     private static int count = 10000;
 
@@ -40,7 +42,7 @@ public class BuildRandomTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(System.currentTimeMillis() - startTime);
+        System.out.println("使用线程池耗时：" + (System.currentTimeMillis() - startTime));
         System.out.println(l.size());
     }
 
@@ -62,7 +64,7 @@ public class BuildRandomTest {
                 e.printStackTrace();
             }
         }
-        System.out.println(System.currentTimeMillis() - startTime);
+        System.out.println("不使用线程池耗时：" + (System.currentTimeMillis() - startTime));
         System.out.println(l.size());
 
     }

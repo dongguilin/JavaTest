@@ -1,4 +1,4 @@
-package com.guilin.java6.thread;
+package com.guilin.java6.thread.concurrent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -7,8 +7,9 @@ import java.util.concurrent.Semaphore;
 /**
  * Created by hadoop on 2015/12/26.
  * 信号量
+ * 10个资源，可用时提供5个，没有可用时阻塞等待，用完时，释放资源(release)
  */
-public class SemaphoreTest {
+public class SemaphoreTest2 {
 
     public static void main(String[] args) {
         ExecutorService pool = Executors.newCachedThreadPool();

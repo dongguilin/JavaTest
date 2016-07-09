@@ -13,6 +13,9 @@ import java.util.concurrent.Executors;
  * Date: 15-3-4
  * Time: 下午8:11
  * To change this template use File | Settings | File Templates.
+ * <p/>
+ * 三个旅行团分别以自驾游、旅游大巴、徒步的方式去Shenzhen, Guangzhou, Shaoguan, Changsha, Wuhan旅游，
+ * 三个团同时都到一个地方后才能去下一个旅游景点
  */
 public class CyclicBarrierTest {
 
@@ -28,6 +31,7 @@ public class CyclicBarrierTest {
         return sdf.format(new Date()) + ": ";
     }
 
+    //旅游
     static class Tour implements Runnable {
         private int[] times;
         private CyclicBarrier barrier;
@@ -42,19 +46,19 @@ public class CyclicBarrierTest {
         public void run() {
             try {
                 Thread.sleep(times[0] * 1000);
-                System.out.println(now() + tourName + " Reached Shenzhen");
+                System.out.println(now() + tourName + " arrived Shenzhen");
                 barrier.await();
                 Thread.sleep(times[1] * 1000);
-                System.out.println(now() + tourName + " Reached Guangzhou");
+                System.out.println(now() + tourName + " arrived Guangzhou");
                 barrier.await();
                 Thread.sleep(times[2] * 1000);
-                System.out.println(now() + tourName + " Reached Shaoguan");
+                System.out.println(now() + tourName + " arrived Shaoguan");
                 barrier.await();
                 Thread.sleep(times[3] * 1000);
-                System.out.println(now() + tourName + " Reached Changsha");
+                System.out.println(now() + tourName + " arrived Changsha");
                 barrier.await();
                 Thread.sleep(times[4] * 1000);
-                System.out.println(now() + tourName + " Reached Wuhan");
+                System.out.println(now() + tourName + " arrived Wuhan");
                 barrier.await();
             } catch (InterruptedException e) {
             } catch (BrokenBarrierException e) {
@@ -63,7 +67,7 @@ public class CyclicBarrierTest {
     }
 
     public static void main(String[] args) {
-// 三个旅行团
+        // 三个旅行团
         CyclicBarrier barrier = new CyclicBarrier(3);
         ExecutorService exec = Executors.newFixedThreadPool(3);
         exec.submit(new Tour(barrier, "WalkTour", timeWalk));
