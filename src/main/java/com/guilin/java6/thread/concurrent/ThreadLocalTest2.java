@@ -1,4 +1,4 @@
-package com.guilin.java6.thread;
+package com.guilin.java6.thread.concurrent;
 
 import java.util.Random;
 
@@ -7,13 +7,13 @@ import java.util.Random;
  *
  * @author Administrator
  */
-public class ThreadLocalTest implements Runnable {
+public class ThreadLocalTest2 implements Runnable {
 
     private static final ThreadLocal<Student> threadLocal = new ThreadLocal<Student>();
 
     public static void main(String[] args) {
 
-        ThreadLocalTest test1 = new ThreadLocalTest();
+        ThreadLocalTest2 test1 = new ThreadLocalTest2();
         new Thread(test1, "a").start();
         new Thread(test1, "b").start();
 
