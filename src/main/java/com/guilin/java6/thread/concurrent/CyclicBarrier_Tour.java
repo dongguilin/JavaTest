@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * 三个旅行团分别以自驾游、旅游大巴、徒步的方式去Shenzhen, Guangzhou, Shaoguan, Changsha, Wuhan旅游，
  * 三个团同时都到一个地方后才能去下一个旅游景点
  */
-public class CyclicBarrierTest {
+public class CyclicBarrier_Tour {
 
     // 徒步需要的时间: Shenzhen, Guangzhou, Shaoguan, Changsha, Wuhan
     private static int[] timeWalk = {5, 8, 15, 15, 10};
