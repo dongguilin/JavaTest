@@ -11,8 +11,6 @@ public class Client {
         Data data = client.request("name");
         System.out.println("请求完毕");
 
-        data.getResult();
-
         try {
             //这里可以用一个sleep代替对其他业务的逻辑的处理
             //在处理这些业务逻辑的过程中，RealData被创建，从而充分利用了等待时间
