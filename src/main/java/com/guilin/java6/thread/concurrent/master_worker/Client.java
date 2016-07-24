@@ -5,6 +5,7 @@ import java.util.Set;
 
 /**
  * Created by T57 on 2016/7/24 0024.
+ * 并行程序的Master-worker模式
  */
 public class Client {
 

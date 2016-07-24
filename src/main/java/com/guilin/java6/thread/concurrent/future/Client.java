@@ -2,6 +2,7 @@ package com.guilin.java6.thread.concurrent.future;
 
 /**
  * Created by T57 on 2016/7/18 0018.
+ * 并行程序的future模式
  */
 public class Client {
 
