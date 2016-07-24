@@ -1,4 +1,4 @@
-package com.guilin.java6.thread.concurrent.masterworker;
+package com.guilin.java6.thread.concurrent.master_worker;
 
 import java.util.Map;
 import java.util.Set;

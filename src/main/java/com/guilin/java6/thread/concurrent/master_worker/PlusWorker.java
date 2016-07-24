@@ -1,4 +1,4 @@
-package com.guilin.java6.thread.concurrent.masterworker;
+package com.guilin.java6.thread.concurrent.master_worker;
 
 /**
  * Created by T57 on 2016/7/24 0024.
