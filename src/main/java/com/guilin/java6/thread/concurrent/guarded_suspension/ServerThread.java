@@ -1,5 +1,8 @@
 package com.guilin.java6.thread.concurrent.guarded_suspension;
 
+import com.guilin.java6.thread.concurrent.future.FutureData;
+import com.guilin.java6.thread.concurrent.future.RealData;
+
 /**
  * Created by T57 on 2016/7/24 0024.
  * 服务器进程
@@ -17,11 +20,12 @@ public class ServerThread extends Thread {
     public void run() {
         while (true) {
             final Request request = requestQueue.getRequest();//得到请求
-            try {
-                Thread.sleep(100);//模拟请求处理耗时
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            final FutureData futureData = (FutureData) request.getResponse();
+            //RealData的创建比较耗时
+            RealData realData = new RealData(request.getName());
+            //处理完成后，通知客户进程
+            futureData.setRealData(realData);
+
             System.out.println(Thread.currentThread().getName() + " handles " + request);
         }
     }
