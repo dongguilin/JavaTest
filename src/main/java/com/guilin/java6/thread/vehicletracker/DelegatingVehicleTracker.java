@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Created by T57 on 2016/9/8 0008.
  * 基于委托的车辆追踪器
+ * 使用线程安全的ConcurrentMap管理车辆位置信息
  */
 public class DelegatingVehicleTracker {
     private final ConcurrentMap<String, Point> locations;
@@ -25,7 +26,8 @@ public class DelegatingVehicleTracker {
     }
 
     //返回一个不可修改的车辆位置的快照
-    public Map<String, Point> getLocations2() {
+    public Map<String, Point> getCopyLocations() {
+        //浅拷贝，由于Point是不可变对象，相当于深拷贝的效果
         return Collections.unmodifiableMap(new HashMap<String, Point>(locations));
     }
 
@@ -46,7 +48,8 @@ public class DelegatingVehicleTracker {
         DelegatingVehicleTracker tracker = new DelegatingVehicleTracker(map);
 
         Map<String, Point> locations = tracker.getLocations();
-        Map<String, Point> locations2 = tracker.getLocations2();
+
+        Map<String, Point> copyLocations = tracker.getCopyLocations();
 
         tracker.setLocations("car", 22, 23);
 
