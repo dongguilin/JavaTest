@@ -1,8 +1,28 @@
 apache_poi  操作Microsoft Document
 collection  集合
 common  通用
+commonsnet
 designpattern   设计模式
+dom4j
 exception   异常
+groovy
+guva
+itext
 java7   java7测试
+jide
+jodd
+lang
+log4j
+mongodb
+netty
+nio NIO
+oop
+performance 性能优化技巧
+proxy   代理
+quartz  定时任务调度框架
+reference 引用(强引用、软引用、弱引用、虚引用)
+reflect 反射
+snmp
+swing
 thread  线程
 util    工具类
