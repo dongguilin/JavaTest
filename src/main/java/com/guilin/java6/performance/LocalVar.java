@@ -7,8 +7,8 @@ import java.util.Map;
 
 /**
  * Created by guilin on 2016/9/8.
- *  调用方法时传递的参数以及在调用中创建的临时变量都保存在栈(Stack)中，速度较快。
- *  其他变量，如静态变量、实例变量等，都在堆(Heap)中创建，速度较慢。
+ * 调用方法时传递的参数以及在调用中创建的临时变量都保存在栈(Stack)中，速度较快。
+ * 其他变量，如静态变量、实例变量等，都在堆(Heap)中创建，速度较慢。
  */
 public class LocalVar {
 
@@ -27,6 +27,7 @@ public class LocalVar {
 //            num++;
         }
     }
+
     @Test
     public void test2() {
         Map<String, Object> maps = ConfigData.getData();
@@ -36,12 +37,13 @@ public class LocalVar {
 //            numl++;
         }
     }
+
     @Test
-    public void test3(){
-        Map<String,Object> maps = new HashedMap();
-        maps.put("hello","world");
+    public void test3() {
+        Map<String, Object> maps = new HashedMap();
+        maps.put("hello", "world");
         for (int i = 0; i < 100000000; i++) {
-           maps.containsKey("hello");
+            maps.containsKey("hello");
         }
     }
 
