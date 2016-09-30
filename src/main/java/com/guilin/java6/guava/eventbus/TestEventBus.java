@@ -1,4 +1,4 @@
-package com.guilin.java6.guva.eventbus;
+package com.guilin.java6.guava.eventbus;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
