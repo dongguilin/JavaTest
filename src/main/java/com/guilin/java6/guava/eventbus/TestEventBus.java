@@ -40,12 +40,12 @@ public class TestEventBus {
 
         @Subscribe
         public void listen(Integer a) {
-            System.out.println(a);
+            System.out.println("Integer:" + a);
         }
 
         @Subscribe
         public void listen(Boolean b) {
-            System.out.println(b);
+            System.out.println("Boolean:" + b);
         }
 
         public int getLastMessage() {
