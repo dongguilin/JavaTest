@@ -2,7 +2,6 @@ package com.guilin.java6.guava.eventbus;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;

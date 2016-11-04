@@ -16,9 +16,9 @@ public class MappedByteBufferPerformanceTest {
     private int numOfInts = 4000000;
 
     @Test
-    public void testStreamWrite()throws Exception{
+    public void testStreamWrite() throws Exception {
         DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-        for(int i=0;i<numOfInts;i++){
+        for (int i = 0; i < numOfInts; i++) {
 
         }
     }

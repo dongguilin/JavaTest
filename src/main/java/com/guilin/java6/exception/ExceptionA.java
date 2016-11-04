@@ -5,19 +5,19 @@ package com.guilin.java6.exception;
  */
 public class ExceptionA extends Exception {
 
-    public ExceptionA(){
+    public ExceptionA() {
 
     }
 
-    public ExceptionA(String message){
+    public ExceptionA(String message) {
         super(message);
     }
 
-    public ExceptionA(Throwable throwable){
+    public ExceptionA(Throwable throwable) {
         super(throwable);
     }
 
-    public ExceptionA(String message, Throwable throwable){
+    public ExceptionA(String message, Throwable throwable) {
         super(message, throwable);
     }
 

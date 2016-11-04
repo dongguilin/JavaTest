@@ -22,12 +22,12 @@ public class TelnetClientHandler extends SimpleChannelInboundHandler<String> {
             ctx.writeAndFlush("admin\r\n");
         } else if (msg.equals("Username:")) {
             ctx.writeAndFlush("yhxt@123\r\n");
-        } else if(msg.contains("Unauthorized access or use may lead to prosecution")){
+        } else if (msg.contains("Unauthorized access or use may lead to prosecution")) {
             ctx.writeAndFlush("\r\n");
-        }else if (msg.equals("<LNS>")) {
+        } else if (msg.equals("<LNS>")) {
             ctx.writeAndFlush("display arp\r\n");
             flag = true;
-        }else if(msg.length()>0 && flag){
+        } else if (msg.length() > 0 && flag) {
             ctx.writeAndFlush(" ");
         }
     }

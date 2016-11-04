@@ -6,6 +6,7 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 /**
  * Created by guilin on 2014/4/29.
@@ -15,7 +16,8 @@ public class PersonCellRender extends AbstractCellEditor implements TableCellRen
     private Person person;
 
     public PersonCellRender() {
-        Icon icon = new ImageIcon(this.getClass().getResource("/").getPath() + "right.jpg");
+        String path = System.getProperty("user.dir") + File.separator + "tmp" + File.separator;
+        Icon icon = new ImageIcon(path + "right.jpg");
         label = new JLabel(icon);
         label.addMouseListener(this);
     }

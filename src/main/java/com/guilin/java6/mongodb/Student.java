@@ -9,7 +9,7 @@ import java.util.Set;
  */
 public class Student {
 
-    private  String id;
+    private String id;
 
     private String name;
 
@@ -17,7 +17,7 @@ public class Student {
 
     private int height;
 
-    private List<Map<String,Integer>> score;
+    private List<Map<String, Integer>> score;
 
     private Set<String> info;
 

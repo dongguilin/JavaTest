@@ -31,7 +31,7 @@ public class StudentTest {
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is("S1000"));
         long start = System.currentTimeMillis();
-        template.find(query,Student.class,collectionName);
+        template.find(query, Student.class, collectionName);
 //        long num = template.count(query, Student.class);
         System.out.println(System.currentTimeMillis() - start);
 //        System.out.println(num);
@@ -149,7 +149,7 @@ public class StudentTest {
         set.add("2.0.5");
 
 //        update.addToSet("info",set);
-        update.set("info",set);
+        update.set("info", set);
 
 
 //        update.addToSet("score",scores);

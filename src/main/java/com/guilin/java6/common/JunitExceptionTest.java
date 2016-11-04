@@ -1,7 +1,6 @@
 package com.guilin.java6.common;
 
 
-import junit.framework.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

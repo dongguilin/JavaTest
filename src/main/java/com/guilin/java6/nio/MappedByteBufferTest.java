@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
 public class MappedByteBufferTest {
 
     public static void main(String[] args) throws Exception {
-        RandomAccessFile raf = new RandomAccessFile("E:/test/FilePathSrcTest.txt", "rw");
+        RandomAccessFile raf = new RandomAccessFile(args[0], "rw");
         FileChannel fileChannel = raf.getChannel();
 
         //文件映射到内存

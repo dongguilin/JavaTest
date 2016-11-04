@@ -3,7 +3,9 @@ package com.guilin.java6.swing;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
 
 /**
  * Created by guilin on 2014/4/29.
@@ -14,7 +16,8 @@ public class LabelCellRenderer implements TableCellRenderer, MouseListener {
     private Person person;
 
     public LabelCellRenderer() {
-        Icon icon = new ImageIcon(this.getClass().getResource("/").getPath() + "left.jpg");
+        String path = System.getProperty("user.dir") + File.separator + "tmp" + File.separator;
+        Icon icon = new ImageIcon(path + "left.jpg");
         label = new JLabel(icon);
         label.addMouseListener(this);
     }

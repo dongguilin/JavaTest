@@ -47,21 +47,20 @@ public class MongodbTest {
         MongoClient client = new MongoClient("aleiyeb", 27017);
         MongoTemplate mongoTemplate1 = new MongoTemplate(client, "aleiye_app");
         Map map = new HashMap();
-        map.put("appId","A6975997718426");
-        mongoTemplate1.insert(map,"t_app_version");
+        map.put("appId", "A6975997718426");
+        mongoTemplate1.insert(map, "t_app_version");
     }
 
 
-
     @Test
-    public void testFindAndRemove() throws Exception{
+    public void testFindAndRemove() throws Exception {
         Query query = new Query();
         query.addCriteria(Criteria.where("name").is("1aa"));
-        mongoTemplate.find(query,Student.class,collectionName);
+        mongoTemplate.find(query, Student.class, collectionName);
     }
 
     @Test
-    public void testa1()throws Exception{
+    public void testa1() throws Exception {
         String appId = "A6975997718426";
         long from = new DateTime("2015-05-20").withTimeAtStartOfDay().getMillis();
         long to = new DateTime("2015-05-25").withTimeAtStartOfDay().getMillis();
@@ -72,7 +71,7 @@ public class MongodbTest {
 //        }
         criteria.and("time").gte(from).lt(to);
 //        if (type == Constants.TYPE1) {//日志在用户手机生成日期与上传日期为同一天
-            criteria.and("uploadTime").gte(from).lt(to);
+        criteria.and("uploadTime").gte(from).lt(to);
 //        }
 
         GroupBy gb = GroupBy.key("appVersion");

@@ -10,7 +10,7 @@ public class ExceptionTest {
         throw new ExceptionA("ExceptionA");
     }
 
-    static void methodB() throws ExceptionB{
+    static void methodB() throws ExceptionB {
         System.out.println("methodB invoke!");
         try {
             methodA();

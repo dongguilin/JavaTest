@@ -5,6 +5,7 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Created by guilin on 2014/4/29.
@@ -15,7 +16,8 @@ public class ButtonCellRenderer implements TableCellRenderer, ActionListener {
     private Person person;
 
     public ButtonCellRenderer() {
-        Icon icon = new ImageIcon(this.getClass().getResource("/").getPath() + "left.jpg");
+        String path = System.getProperty("user.dir") + File.separator + "tmp" + File.separator;
+        Icon icon = new ImageIcon(path + "left.jpg");
         label = new JButton(icon);
         label.addActionListener(this);
     }

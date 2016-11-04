@@ -11,19 +11,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.7</jdk.version>
-        <apache.poi>3.9</apache.poi>
         <dom4j>1.6.1</dom4j>
         <jodd>3.6.7</jodd>
         <mongo.java.driver>2.13.3</mongo.java.driver>
         <json.lib>2.3</json.lib>
-        <quartz>2.2.1</quartz>
         <jdom>1.1.3</jdom>
         <netty>4.0.23.Final</netty>
         <joda.time>2.1</joda.time>
         <commons.net>3.3</commons.net>
         <commons.io>2.4</commons.io>
-        <snmp4j>1.10.1</snmp4j>
-        <spring>4.1.0.RELEASE</spring>
         <codehaus.jackson.mapper.asl>1.9.13</codehaus.jackson.mapper.asl>
         <fastjson>1.2.8</fastjson>
 
@@ -53,7 +49,6 @@
             <version>4.12</version>
             <!--<scope>test</scope>-->
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-junit -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-junit</artifactId>
@@ -86,19 +81,6 @@
             <version>${dom4j}</version>
         </dependency>
 
-        <!--apache poi-->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${apache.poi}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${apache.poi}</version>
-        </dependency>
-        <!--apache poi-->
-
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
@@ -117,67 +99,6 @@
             <artifactId>joda-time</artifactId>
             <version>${joda.time}</version>
         </dependency>
-
-        <!--quartz-->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>${quartz}</version>
-        </dependency>
-        <!--quartz-->
-
-        <!--spring-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring}</version>
-        </dependency>
-        <!--spring-->
-
-        <!--pdf-->
-        <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itext</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>jtidy</groupId>
-            <artifactId>jtidy</artifactId>
-            <version>4aug2000r7-dev</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.barcode4j</groupId>
-            <artifactId>barcode4j-light</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>avalon-framework</groupId>
-            <artifactId>avalon-framework-impl</artifactId>
-            <version>4.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-pdf</artifactId>
-            <version>9.0.8</version>
-        </dependency>
-        <!-- pdf -->
 
         <!--json-->
         <dependency>
@@ -199,12 +120,6 @@
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>${commons.net}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.snmp4j</groupId>
-            <artifactId>snmp4j</artifactId>
-            <version>${snmp4j}</version>
         </dependency>
 
         <dependency>

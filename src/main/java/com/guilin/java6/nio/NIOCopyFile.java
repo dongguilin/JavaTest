@@ -1,5 +1,6 @@
 package com.guilin.java6.nio;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,8 +14,9 @@ import java.nio.channels.FileChannel;
 public class NIOCopyFile {
 
     public static void main(String[] args) throws IOException {
-        String path = NIOCopyFile.class.getClassLoader().getResource("").getPath();
-        nioCopyFile(path + "/left.jpg", path + "/left2.jpg");
+        String path = System.getProperty("user.dir") + File.separator + "tmp" + File.separator;
+        String path2 = NIOCopyFile.class.getClassLoader().getResource(".").getPath() + File.separator + "left2.jpg";
+        nioCopyFile(path + "left.jpg", path2);
     }
 
     public static void nioCopyFile(String resource, String destination) throws IOException {
