@@ -22,6 +22,8 @@
         <commons.io>2.4</commons.io>
         <codehaus.jackson.mapper.asl>1.9.13</codehaus.jackson.mapper.asl>
         <fastjson>1.2.8</fastjson>
+        <slf4j-api.version>1.7.7</slf4j-api.version>
+        <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
 
     </properties>
 
@@ -62,10 +64,16 @@
 
         <!--log-->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-log4j12.version}</version>
+        </dependency>
+        <!--log end-->
 
         <!--jodd-->
         <dependency>
