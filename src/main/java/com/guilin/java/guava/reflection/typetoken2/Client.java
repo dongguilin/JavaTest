@@ -1,7 +1,6 @@
 package com.guilin.java.guava.reflection.typetoken2;
 
 import com.google.common.reflect.TypeToken;
-import com.guilin.java.proxy.e1.Calculator;
 import org.junit.Assert;
 import org.junit.Test;
 
