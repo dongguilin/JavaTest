@@ -1,5 +1,7 @@
 package com.guilin.java.protobuf.tutorial;
 
+import org.junit.Test;
+
 import java.io.*;
 
 import static com.guilin.java.protobuf.tutorial.AddressBookProtos.AddressBook;
@@ -54,6 +56,27 @@ public class AddPerson {
         }
 
         return person.build();
+    }
+
+    @Test
+    public void test1() throws IOException {
+        Person person = Person.newBuilder()
+                .setId(1)
+                .setName("zhangsan")
+                .addPhone(Person.PhoneNumber.newBuilder().setNumber("110").setType(Person.PhoneType.WORK).build())
+                .setEmail("zhangsan@qq.com")
+                .build();
+
+        String path = AddPerson.class.getClassLoader().getResource("").getPath() + File.separator + "person.tmp";
+        person.writeTo(new FileOutputStream(path));
+        System.out.println(person);
+
+        AddressBook addressBook = AddressBook.newBuilder().addPerson(person).build();
+        System.out.println(addressBook);
+
+        Person newPerson = Person.newBuilder().mergeFrom(new FileInputStream(path)).build();
+        System.out.println(newPerson);
+
     }
 
     // Main function:  Reads the entire address book from a file,
