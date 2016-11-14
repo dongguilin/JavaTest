@@ -24,6 +24,8 @@
         <fastjson>1.2.8</fastjson>
         <slf4j-api.version>1.7.7</slf4j-api.version>
         <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
+        <guava>18.0</guava>
+        <protobuf>3.0.0</protobuf>
 
     </properties>
 
@@ -158,10 +160,16 @@
             <version>1.8.1.RELEASE</version>
         </dependency>
 
+        <!--google-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>${guava}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${protobuf}</version>
         </dependency>
 
 
