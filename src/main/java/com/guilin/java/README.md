@@ -1,0 +1,23 @@
+- collection  集合
+- common  通用
+- designpattern   设计模式
+- exception   异常
+- groovy
+- guva
+- java7   java7测试
+- jodd
+- lang
+- log4j
+- mongodb
+- netty
+- nio NIO
+- oop
+- performance 性能优化技巧
+- proxy   代理
+- reference 引用
+  ***
+     强引用、软引用SoftReference、弱引用WeakReference、虚引用PhantomReference
+- reflect 反射
+- swing
+- thread  线程
+- util    工具类
