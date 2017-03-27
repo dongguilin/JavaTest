@@ -15,7 +15,8 @@ public class NIOCopyFile {
 
     public static void main(String[] args) throws IOException {
         String path = System.getProperty("user.dir") + File.separator + "tmp" + File.separator;
-        String path2 = NIOCopyFile.class.getClassLoader().getResource(".").getPath() + File.separator + "left2.jpg";
+        String path2 = NIOCopyFile.class.getClassLoader().getResource(".").getPath() + "left2.jpg";
+        System.out.println(path2);
         nioCopyFile(path + "left.jpg", path2);
     }
 

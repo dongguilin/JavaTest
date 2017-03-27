@@ -166,7 +166,7 @@ public class ByteBuffTest {
 
         ByteBuffer[] bufs = new ByteBuffer[]{bookBuf, autBuf};
         String path = ByteBuffTest.class.getClassLoader().getResource("").getPath();
-        File file = new File(path + "/test.txt");
+        File file = new File(path + "test.txt");
         if (!file.exists()) {
             file.createNewFile();
         }
