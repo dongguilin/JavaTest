@@ -1,7 +1,5 @@
 package com.guilin.java.thread.concurrent;
 
-import sun.awt.util.IdentityLinkedList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -48,7 +46,7 @@ public class ThrealPoolVSNotPoolTest {
 
     public static void notUseThreadPool() {
         long startTime = System.currentTimeMillis();
-        final List<Integer> l = new IdentityLinkedList<>();
+        final List<Integer> l = new ArrayList<>();
         final Random random = new Random();
         for (int i = 0; i < count; i++) {
             Thread thread = new Thread() {
