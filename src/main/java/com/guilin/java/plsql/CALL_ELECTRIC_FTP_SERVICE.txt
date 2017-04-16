@@ -1,0 +1,62 @@
+CREATE OR REPLACE
+PROCEDURE CALL_ELECTRIC_FTP_SERVICE (province in varchar2,filename in varchar2,outbuf out clob,outret out number) is
+	sFtpIp		varchar2(15);
+	sFtpPort	varchar2(6);
+	sUsername		varchar2(40);
+  sPassword varchar2(42);
+	sPath		varchar2(6);
+  ftp_connection		utl_tcp.connection;
+  temp_bfile bfile;
+
+     lang_ctx        number := dbms_lob.default_lang_ctx;
+     charset_id      number := 0;
+     src_offset      number := 1 ;
+     dst_offset      number := 1 ;
+     warning         number;
+begin
+	sFtpIp:='127.0.0.1';
+	sFtpPort:=21;
+
+
+  begin
+    select ftp_host,ftp_port,username,password,path into sFtpIp,sFtpPort,sUsername,sPassword,sPath from tb_electric_ftp_config where province_code=province;
+  exception
+  when no_data_found then
+      dbms_output.put_line('配置表中tb_electric_ftp_config没有省码为'||province||'的配置信息');
+      return ;
+  end;
+    begin
+  ftp_connection := ftp.login(sFtpIp, sFtpPort, sUsername, sPassword);
+  ftp.ascii(p_conn => ftp_connection);
+  ftp.get(p_conn      => ftp_connection,
+          p_from_file => filename,
+          p_to_dir    => 'ELECTRIC_TEMP_DIR',
+          p_to_file   => filename);
+  ftp.logout(ftp_connection);
+
+    exception
+        when others then
+        outret := -1;
+        dbms_output.put_line(sqlerrm(sqlcode));
+
+    end;
+
+    begin
+    insert into temp_bfile (id,tempfile)
+         values (filename,empty_clob())
+         returning tempfile into outbuf;
+    temp_bfile := bfilename('ELECTRIC_TEMP_DIR',filename);
+    dbms_lob.fileopen(temp_bfile, dbms_lob.file_readonly);
+    dbms_lob.loadclobfromfile(outbuf, temp_bfile,dbms_lob.getLength(temp_bfile), src_offset, dst_offset, nls_charset_id('UTF8'), lang_ctx,warning);
+    dbms_lob.fileclose(temp_bfile);
+     commit;
+
+    exception
+        when others then
+        outret := -2;
+        dbms_output.put_line(sqlerrm(sqlcode));
+    end;
+
+
+end CALL_ELECTRIC_FTP_SERVICE;
+

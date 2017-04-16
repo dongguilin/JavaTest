@@ -1,0 +1,49 @@
+CREATE OR REPLACE
+PROCEDURE WSPROXY_SEND_REQUEST_PRO (wsdlUrl IN VARCHAR2, targetNamespace IN VARCHAR2,
+serviceName IN VARCHAR2, operationName IN VARCHAR2, reqbody in varchar2, resenv out varchar2)
+IS
+l_service               SYS.UTL_DBWS.service;
+l_call              		SYS.UTL_DBWS.call;
+l_result                ANYDATA;
+l_xmltype_out      			SYS.XMLTYPE;
+l_service_qname         SYS.UTL_DBWS.qname;
+l_port_qname            SYS.UTL_DBWS.qname;
+l_operation_qname       SYS.UTL_DBWS.qname;
+l_input_params          SYS.UTL_DBWS.ANYDATA_LIST;
+
+boolean_type_qname      SYS.UTL_DBWS.QNAME;
+string_type_qname       SYS.UTL_DBWS.QNAME;
+long_type_qname         SYS.UTL_DBWS.QNAME;
+
+begin
+
+
+l_service_qname := SYS.UTL_DBWS.to_qname(targetNamespace, serviceName);
+--l_port_qname := SYS.UTL_DBWS.to_qname(targetNamespace, '');
+l_operation_qname := SYS.UTL_DBWS.to_qname(targetNamespace, operationName);
+
+l_service := SYS.UTL_DBWS.CREATE_SERVICE(URIFACTORY.getURI(wsdlUrl), l_service_qname);
+l_call := SYS.UTL_DBWS.CREATE_CALL(l_service, null, l_operation_qname);
+
+boolean_type_qname := SYS.UTL_DBWS.to_qname('http://www.w3.org/2001/XMLSchema', 'boolean');
+string_type_qname := SYS.UTL_DBWS.to_qname('http://www.w3.org/2001/XMLSchema', 'string');
+long_type_qname := SYS.UTL_DBWS.to_qname('http://www.w3.org/2001/XMLSchema', 'long');
+
+SYS.UTL_DBWS.add_parameter(l_call, 'xmlParam', string_type_qname, 'ParameterMode.IN');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'SOAPACTION_USE', 'TRUE');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'SOAPACTION_URI', '');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'ENCODINGSTYLE_URI', 'http://schemas.xmlsoap.org/soap/encoding/');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'OPERATION_STYLE', 'rpc');
+
+l_input_params(0) := ANYDATA.ConvertVarchar2(reqbody);
+
+sys.utl_dbws.set_return_type(l_call, string_type_qname);
+
+l_result := SYS.UTL_DBWS.invoke(l_call, l_input_params);
+
+SYS.UTL_DBWS.RELEASE_CALL(l_call);
+SYS.UTL_DBWS.RELEASE_SERVICE(l_service);
+
+--dbms_output.enable(32767);
+resenv := ANYDATA.AccessVarchar2(l_result);
+END;

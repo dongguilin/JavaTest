@@ -1,0 +1,52 @@
+CREATE OR REPLACE
+PROCEDURE WSPROXY_SEND_REQUEST_PRO3 (resenv out CLOB)
+IS
+l_service               SYS.UTL_DBWS.service;
+l_call              		SYS.UTL_DBWS.call;
+l_result                ANYDATA;
+l_xmltype_out      			SYS.XMLTYPE;
+l_service_qname         SYS.UTL_DBWS.qname;
+l_port_qname            SYS.UTL_DBWS.qname;
+l_operation_qname       SYS.UTL_DBWS.qname;
+l_input_params          SYS.UTL_DBWS.ANYDATA_LIST;
+
+boolean_type_qname      SYS.UTL_DBWS.QNAME;
+string_type_qname       SYS.UTL_DBWS.QNAME;
+long_type_qname         SYS.UTL_DBWS.QNAME;
+l_resenv								VARCHAR2(32767);
+
+begin
+
+
+l_service_qname := SYS.UTL_DBWS.to_qname('http://sgcscws.webservice.core.epm', 'sgpmsGetData');
+--l_port_qname := SYS.UTL_DBWS.to_qname(targetNamespace, '');
+l_operation_qname := SYS.UTL_DBWS.to_qname('http://sgcscws.webservice.core.epm', 'sgpmsGetData');
+
+l_service := SYS.UTL_DBWS.CREATE_SERVICE(URIFACTORY.getURI('http://192.168.60.123:8080/service/sgpmsGetData?wsdl'), l_service_qname);
+l_call := SYS.UTL_DBWS.CREATE_CALL(l_service, null, l_operation_qname);
+
+boolean_type_qname := SYS.UTL_DBWS.to_qname('http://www.w3.org/2001/XMLSchema', 'boolean');
+string_type_qname := SYS.UTL_DBWS.to_qname('http://www.w3.org/2001/XMLSchema', 'string');
+long_type_qname := SYS.UTL_DBWS.to_qname('http://www.w3.org/2001/XMLSchema', 'long');
+
+SYS.UTL_DBWS.add_parameter(l_call, 'xmlParam', string_type_qname, 'ParameterMode.IN');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'USERNAME', null);
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'PASSWORD', null);
+--SYS.UTL_DBWS.SET_PROPERTY(l_call, 'SOAPACTION_USE', 'TRUE');
+--SYS.UTL_DBWS.SET_PROPERTY(l_call, 'SOAPACTION_URI', '');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'ENCODINGSTYLE_URI', 'http://schemas.xmlsoap.org/soap/encoding/');
+SYS.UTL_DBWS.SET_PROPERTY(l_call, 'OPERATION_STYLE', 'rpc');
+
+l_input_params(0) := ANYDATA.ConvertVarchar2('abc');
+
+sys.utl_dbws.set_return_type(l_call, string_type_qname);
+
+l_result := SYS.UTL_DBWS.invoke(l_call, l_input_params);
+resenv := ANYDATA.AccessVarchar2(l_result);
+--resenv := ANYDATA.AccessClob(l_result);
+SYS.DBMS_OUTPUT."ENABLE"(32767);
+
+
+SYS.UTL_DBWS.RELEASE_CALL(l_call);
+SYS.UTL_DBWS.RELEASE_SERVICE(l_service);
+END;
