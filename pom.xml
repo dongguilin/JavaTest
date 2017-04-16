@@ -10,23 +10,30 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.7</jdk.version>
-        <dom4j>1.6.1</dom4j>
-        <jodd>3.6.7</jodd>
-        <mongo.java.driver>2.13.3</mongo.java.driver>
-        <json.lib>2.3</json.lib>
-        <jdom>1.1.3</jdom>
-        <netty>4.0.23.Final</netty>
-        <joda.time>2.1</joda.time>
-        <commons.net>3.3</commons.net>
-        <commons.io>2.4</commons.io>
+        <jdk.version>1.8</jdk.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <jodd.version>3.6.7</jodd.version>
+        <json.lib.version>2.3</json.lib.version>
+        <jdom.version>1.1.3</jdom.version>
+        <netty.version>4.0.23.Final</netty.version>
+        <joda.time.version>2.1</joda.time.version>
+        <commons.net.version>3.3</commons.net.version>
+        <commons.io.version>2.4</commons.io.version>
+        <commons.codec.version>1.10</commons.codec.version>
+        <commons-lang.version>2.6</commons-lang.version>
         <codehaus.jackson.mapper.asl>1.9.13</codehaus.jackson.mapper.asl>
-        <fastjson>1.2.8</fastjson>
-        <slf4j-api.version>1.7.7</slf4j-api.version>
+        <fastjson.version>1.2.8</fastjson.version>
         <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
-        <guava>18.0</guava>
-        <protobuf>3.0.0</protobuf>
+        <guava.version>18.0</guava.version>
+        <protobuf.version>3.0.0</protobuf.version>
         <jackson.version>2.8.7</jackson.version>
+        <jackson-mapper-asl.version>1.9.12</jackson-mapper-asl.version>
+        <junit.version>4.12</junit.version>
+        <hamcrest.junit.version>2.0.0.0</hamcrest.junit.version>
+        <hamcrest.json.version>0.2</hamcrest.json.version>
+        <groovy.version>2.4.6</groovy.version>
+        <spring-data-mongodb.version>1.8.1.RELEASE</spring-data-mongodb.version>
+        <javassist.version>3.20.0-GA</javassist.version>
     </properties>
 
     <build>
@@ -46,30 +53,31 @@
 
     <dependencies>
 
-        <!--test-->
+        <!--test start-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <!--<scope>test</scope>-->
+            <version>${junit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-junit</artifactId>
-            <version>2.0.0.0</version>
+            <version>${hamcrest.junit.version}</version>
         </dependency>
         <dependency>
             <groupId>uk.co.datumedge</groupId>
             <artifactId>hamcrest-json</artifactId>
-            <version>0.2</version>
+            <version>${hamcrest.json.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-collections</artifactId>
+                    <groupId>commons-collections</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <!--test end-->
 
-        <!--log-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-api.version}</version>
-        </dependency>
+        <!--log start-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -81,40 +89,40 @@
         <dependency>
             <groupId>org.jodd</groupId>
             <artifactId>jodd-core</artifactId>
-            <version>${jodd}</version>
+            <version>${jodd.version}</version>
         </dependency>
         <!--jodd-->
 
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>${dom4j}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>${mongo.java.driver}</version>
+            <version>${dom4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
-            <version>${json.lib}</version>
+            <version>${json.lib.version}</version>
             <classifier>jdk15</classifier>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>${joda.time}</version>
+            <version>${joda.time.version}</version>
         </dependency>
 
         <!--json-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson}</version>
+            <version>${fastjson.version}</version>
         </dependency>
         <!--json-->
 
@@ -122,56 +130,69 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
-            <version>2.4.6</version>
+            <version>${groovy.version}</version>
         </dependency>
         <!--groovy-->
 
+        <!--commons start-->
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
-            <version>${commons.net}</version>
+            <version>${commons.net.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons.codec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <!--commons end-->
 
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>${netty}</version>
+            <version>${netty.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.io}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom</artifactId>
-            <version>${jdom}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>${codehaus.jackson.mapper.asl}</version>
+            <version>${jdom.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-mongodb</artifactId>
-            <version>1.8.1.RELEASE</version>
+            <version>${spring-data-mongodb.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <!--google-->
+        <!--google start-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guava}</version>
+            <version>${guava.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>${protobuf}</version>
+            <version>${protobuf.version}</version>
         </dependency>
-
+        <!--google end-->
 
         <!--jackson start-->
         <dependency>
@@ -180,21 +201,39 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson-mapper-asl.version}</version>
+        </dependency>
+        <!--jackson end-->
+
+        <dependency>
             <groupId>org.codehaus.woodstox</groupId>
             <artifactId>woodstox-core-asl</artifactId>
             <version>4.4.1</version>
         </dependency>
-        <!--jackson end-->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>${javassist.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>6</version>
+        </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com._42six.amino</groupId>-->
-        <!--<artifactId>amino-parent</artifactId>-->
-        <!--<version>2.3.0</version>-->
-        <!--</dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/com.ibm/com.ibm.mq -->
-
-
+        <!--oracle jdbc驱动(可穿墙)-->
+        <dependency>
+            <groupId>sgcc.nds.jdbc</groupId>
+            <artifactId>SqlProxyCfg_Jdbc</artifactId>
+            <version>20120704</version>
+        </dependency>
     </dependencies>
 
 
