@@ -3,7 +3,7 @@ package com.guilin.java.mongodb;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
 import net.sf.json.JSONObject;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Test;

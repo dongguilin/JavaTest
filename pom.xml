@@ -21,6 +21,8 @@
         <commons.io.version>2.4</commons.io.version>
         <commons.codec.version>1.10</commons.codec.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <commons-math3.version>3.4</commons-math3.version>
         <codehaus.jackson.mapper.asl>1.9.13</codehaus.jackson.mapper.asl>
         <fastjson.version>1.2.8</fastjson.version>
         <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
@@ -155,6 +157,17 @@
             <artifactId>commons-lang</artifactId>
             <version>${commons-lang.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>${commons-math3.version}</version>
+        </dependency>
+
         <!--commons end-->
 
         <dependency>
