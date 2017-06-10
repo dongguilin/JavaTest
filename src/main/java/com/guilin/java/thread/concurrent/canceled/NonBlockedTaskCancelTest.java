@@ -14,6 +14,7 @@ public class NonBlockedTaskCancelTest {
     public static void main(String[] args) throws InterruptedException {
         List<BigInteger> primes = new PrimeGenerator().aSecondOfPrimes();
         System.out.println(primes);
+        System.out.println(primes.size());
     }
 
     //PrimeGenerator持续地枚举素数，直到它被取消
@@ -28,6 +29,7 @@ public class NonBlockedTaskCancelTest {
             BigInteger p = BigInteger.ONE;
             while (!cancelled) {
                 p = p.nextProbablePrime();
+                //操作实例属性时，对当前对象做同步操作
                 synchronized (this) {
                     primes.add(p);
                 }
