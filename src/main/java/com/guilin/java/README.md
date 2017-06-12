@@ -10,6 +10,7 @@
 - jodd
 - lang
 - log4j
+- lombok
 - mongodb
 - netty
 - nio NIO
