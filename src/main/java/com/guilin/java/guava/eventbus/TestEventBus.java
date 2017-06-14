@@ -11,7 +11,11 @@ public class TestEventBus {
 
     @Test
     public void testReceiveEvent() throws Exception {
-
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         EventBus eventBus = new EventBus("test");
         EventListener listener = new EventListener();
 
