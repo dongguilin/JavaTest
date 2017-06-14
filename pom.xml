@@ -36,6 +36,7 @@
         <groovy.version>2.4.6</groovy.version>
         <spring-data-mongodb.version>1.8.1.RELEASE</spring-data-mongodb.version>
         <javassist.version>3.20.0-GA</javassist.version>
+        <metrics-core.version>3.2.2</metrics-core.version>
     </properties>
 
     <build>
@@ -253,6 +254,12 @@
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>${metrics-core.version}</version>
         </dependency>
 
     </dependencies>
