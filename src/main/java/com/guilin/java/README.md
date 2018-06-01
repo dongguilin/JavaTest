@@ -7,6 +7,11 @@
 - groovy
 - guva
 - java7   java7测试
+- java8
+    - 方法引用
+    - 重复注解
+    - 更好的类型推断
+    - 拓宽注解的应用场景
 - jodd
 - lang
 - log4j
