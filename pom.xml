@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.guilin.java</groupId>
@@ -24,7 +22,7 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <commons-math3.version>3.4</commons-math3.version>
         <codehaus.jackson.mapper.asl>1.9.13</codehaus.jackson.mapper.asl>
-        <fastjson.version>1.2.8</fastjson.version>
+        <fastjson.version>1.2.69</fastjson.version>
         <slf4j-log4j12.version>1.7.7</slf4j-log4j12.version>
         <guava.version>18.0</guava.version>
         <protobuf.version>3.0.0</protobuf.version>
